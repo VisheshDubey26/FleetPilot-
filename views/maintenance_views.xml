@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_fleetpilot_maintenance_tree" model="ir.ui.view">
+        <name>fleetpilot.maintenance.tree</name>
+        <model>fleetpilot.maintenance</model>
+        <arch type="xml">
+            <tree string="Maintenance Records">
+                <field name="name"/>
+                <field name="title"/>
+                <field name="vehicle_id"/>
+                <field name="maintenance_type"/>
+                <field name="scheduled_date"/>
+                <field name="completion_date"/>
+                <field name="cost" sum="Total Cost"/>
+                <field name="status" widget="badge" decoration-muted="status == 'draft'" decoration-warning="status == 'scheduled'" decoration-info="status == 'progress'" decoration-success="status == 'done'" decoration-danger="status == 'cancel'"/>
+            </tree>
+        </arch>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleetpilot_maintenance_form" model="ir.ui.view">
+        <name>fleetpilot.maintenance.form</name>
+        <model>fleetpilot.maintenance</model>
+        <arch type="xml">
+            <form string="Maintenance">
+                <header>
+                    <button name="action_schedule" string="Schedule Service" type="object" class="oe_highlight" invisible="status != 'draft'"/>
+                    <button name="action_start_maintenance" string="Start Work" type="object" class="oe_highlight" invisible="status != 'scheduled'"/>
+                    <button name="action_complete_maintenance" string="Complete Work" type="object" class="oe_highlight" invisible="status != 'progress'"/>
+                    <button name="action_cancel_maintenance" string="Cancel Service" type="object" invisible="status not in ('draft', 'scheduled', 'progress')"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,scheduled,progress,done,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                        <h2>
+                            <field name="title" placeholder="Service Title (e.g. Engine Oil Change)"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group string="Target &amp; Type">
+                            <field name="vehicle_id"/>
+                            <field name="maintenance_type"/>
+                        </group>
+                        <group string="Schedule &amp; Cost">
+                            <field name="scheduled_date"/>
+                            <field name="completion_date" readonly="1"/>
+                            <field name="cost"/>
+                        </group>
+                    </group>
+                    <separator string="Work Details / Diagnostics"/>
+                    <field name="description" placeholder="Write any specific notes or diagnostic results..."/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleetpilot_maintenance" model="ir.actions.act_window">
+        <name>Maintenance Logs</name>
+        <res_model>fleetpilot.maintenance</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <!-- Menuitem -->
+    <menuitem id="menu_fleetpilot_maintenance"
+              name="Maintenance"
+              parent="menu_fleetpilot_operations"
+              action="action_fleetpilot_maintenance"
+              sequence="40"/>
+</odoo>
