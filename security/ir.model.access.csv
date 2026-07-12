@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleetpilot_vehicle,access_fleetpilot_vehicle,model_fleetpilot_vehicle,base.group_user,1,1,1,1
+access_fleetpilot_driver,access_fleetpilot_driver,model_fleetpilot_driver,base.group_user,1,1,1,1
+access_fleetpilot_trip,access_fleetpilot_trip,model_fleetpilot_trip,base.group_user,1,1,1,1
+access_fleetpilot_maintenance,access_fleetpilot_maintenance,model_fleetpilot_maintenance,base.group_user,1,1,1,1
+access_fleetpilot_fuel_log,access_fleetpilot_fuel_log,model_fleetpilot_fuel_log,base.group_user,1,1,1,1
+access_fleetpilot_expense,access_fleetpilot_expense,model_fleetpilot_expense,base.group_user,1,1,1,1
