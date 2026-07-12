@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_fleetpilot_expense_tree" model="ir.ui.view">
+        <name>fleetpilot.expense.tree</name>
+        <model>fleetpilot.expense</model>
+        <arch type="xml">
+            <tree string="Expenses">
+                <field name="name"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="date"/>
+                <field name="expense_type"/>
+                <field name="amount" sum="Total Spent"/>
+                <field name="status" widget="badge" decoration-muted="status == 'draft'" decoration-info="status == 'submitted'" decoration-success="status == 'approved'" decoration-danger="status == 'refused'"/>
+            </tree>
+        </arch>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleetpilot_expense_form" model="ir.ui.view">
+        <name>fleetpilot.expense.form</name>
+        <model>fleetpilot.expense</model>
+        <arch type="xml">
+            <form string="Expense">
+                <header>
+                    <button name="action_submit" string="Submit to Manager" type="object" class="oe_highlight" invisible="status != 'draft'"/>
+                    <button name="action_approve" string="Approve" type="object" class="oe_highlight" invisible="status != 'submitted'"/>
+                    <button name="action_refuse" string="Refuse" type="object" class="btn-danger" invisible="status != 'submitted'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,submitted,approved,refused"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Assignments">
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
+                        </group>
+                        <group string="Financials">
+                            <field name="date"/>
+                            <field name="expense_type"/>
+                            <field name="amount"/>
+                            <field name="invoice_ref"/>
+                        </group>
+                    </group>
+                    <separator string="Description / Justification"/>
+                    <field name="description" placeholder="Provide justification or descriptions for receipts..."/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleetpilot_expense" model="ir.actions.act_window">
+        <name>Expenses</name>
+        <res_model>fleetpilot.expense</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <!-- Menuitem -->
+    <menuitem id="menu_fleetpilot_expense_logs"
+              name="Expenses"
+              parent="menu_fleetpilot_finance"
+              action="action_fleetpilot_expense"
+              sequence="10"/>
+</odoo>
