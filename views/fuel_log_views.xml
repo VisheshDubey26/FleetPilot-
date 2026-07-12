@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_fleetpilot_fuel_log_tree" model="ir.ui.view">
+        <name>fleetpilot.fuel.log.tree</name>
+        <model>fleetpilot.fuel.log</model>
+        <arch type="xml">
+            <tree string="Fuel Logs">
+                <field name="date"/>
+                <field name="vehicle_id"/>
+                <field name="driver_id"/>
+                <field name="liter" sum="Total Liters"/>
+                <field name="price_per_liter"/>
+                <field name="amount" sum="Total Cost"/>
+                <field name="odometer"/>
+            </tree>
+        </arch>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_fleetpilot_fuel_log_form" model="ir.ui.view">
+        <name>fleetpilot.fuel.log.form</name>
+        <model>fleetpilot.fuel.log</model>
+        <arch type="xml">
+            <form string="Fuel Log">
+                <sheet>
+                    <group>
+                        <group string="Basic Info">
+                            <field name="vehicle_id"/>
+                            <field name="driver_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group string="Fuel Details">
+                            <field name="liter"/>
+                            <field name="price_per_liter"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="odometer"/>
+                        </group>
+                    </group>
+                    <separator string="Invoice / Notes"/>
+                    <group>
+                        <field name="inv_ref"/>
+                    </group>
+                    <field name="notes" placeholder="Any fuel receipts or station details..."/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <!-- Action -->
+    <record id="action_fleetpilot_fuel_log" model="ir.actions.act_window">
+        <name>Fuel Logs</name>
+        <res_model>fleetpilot.fuel.log</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <!-- Menuitem -->
+    <menuitem id="menu_fleetpilot_fuel_log"
+              name="Fuel Logs"
+              parent="menu_fleetpilot_operations"
+              action="action_fleetpilot_fuel_log"
+              sequence="50"/>
+</odoo>
