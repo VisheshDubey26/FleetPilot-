@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Drivers -->
+        <record id="driver_john" model="fleetpilot.driver">
+            <field name="name">John Doe</field>
+            <field name="license_number">DL12345678</field>
+            <field name="license_expiry" eval="(datetime.now() + relativedelta(years=2)).strftime('%Y-%m-%d')"/>
+            <field name="phone">+1 555-0100</field>
+            <field name="email">john.doe@example.com</field>
+            <field name="status">available</field>
+        </record>
+
+        <record id="driver_alice" model="fleetpilot.driver">
+            <field name="name">Alice Smith</field>
+            <field name="license_number">DL87654321</field>
+            <field name="license_expiry" eval="(datetime.now() + relativedelta(years=3)).strftime('%Y-%m-%d')"/>
+            <field name="phone">+1 555-0101</field>
+            <field name="email">alice.smith@example.com</field>
+            <field name="status">available</field>
+        </record>
+
+        <!-- Demo Vehicles -->
+        <record id="vehicle_heavy_truck_1" model="fleetpilot.vehicle">
+            <field name="name">Volvo FH16 Heavy Truck</field>
+            <field name="license_plate">TX-987-AB</field>
+            <field name="vehicle_type">heavy_truck</field>
+            <field name="driver_id" ref="driver_john"/>
+            <field name="status">available</field>
+            <field name="fuel_level">85.0</field>
+            <field name="odometer">12543.0</field>
+        </record>
+
+        <record id="vehicle_van_1" model="fleetpilot.vehicle">
+            <field name="name">Ford Transit Delivery Van</field>
+            <field name="license_plate">CA-543-CD</field>
+            <field name="vehicle_type">delivery_van</field>
+            <field name="driver_id" ref="driver_alice"/>
+            <field name="status">available</field>
+            <field name="fuel_level">92.5</field>
+            <field name="odometer">4582.0</field>
+        </record>
+    </data>
+</odoo>

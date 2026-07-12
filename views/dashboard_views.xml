@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Custom Dashboard Kanban or Client Action View definition for Odoo 18 -->
+    <record id="action_fleetpilot_dashboard" model="ir.actions.client">
+        <name>FleetPilot Live Operations Dashboard</name>
+        <field name="tag">fleetpilot_dashboard</field>
+        <field name="context">{'active_id': 'fleetpilot'}</field>
+    </record>
+
+    <!-- Menuitem for Dashboard -->
+    <menuitem id="menu_fleetpilot_dashboard"
+              name="Dashboard"
+              parent="menu_fleetpilot_root"
+              action="action_fleetpilot_dashboard"
+              sequence="1"/>
+</odoo>

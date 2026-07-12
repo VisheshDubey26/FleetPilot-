@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_fleetpilot_root"
+              name="FleetPilot"
+              web_icon="fleetpilot,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Operational Menus -->
+    <menuitem id="menu_fleetpilot_operations"
+              name="Operations"
+              parent="menu_fleetpilot_root"
+              sequence="10"/>
+
+    <menuitem id="menu_fleetpilot_finance"
+              name="Finance"
+              parent="menu_fleetpilot_root"
+              sequence="20"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_fleetpilot_config"
+              name="Configuration"
+              parent="menu_fleetpilot_root"
+              sequence="100"/>
+</odoo>
